@@ -140,6 +140,22 @@ router.get('/class/list', (req, res) => {
     });
 });
 
+router.post('/student/remove', (req, res) => {
+    server(req, res, (req, res) => {
+        console.log('removing student')
+        let data = app.readFile(`classes/${req.body.class}.json`);
+        if (data[req.body.username]) {
+            delete data[req.body.username];
+        }
+        else {
+            res.status(403);
+        }
+        app.writeFile(`classes/${req.body.class}.json`, data);
+        res.send();
+        console.log('student deleted');
+    });
+});
+
 router.get('/attendance', (req, res) => {
     server(req, res, (req, res) => {
         res.send(app.readFile(`classes/${req.body.class}.json`));

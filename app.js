@@ -9,7 +9,7 @@ const teacher = require('./profiles/teacher');
 const student = require('./profiles/student');
 
 app.listen(port, () => { console.log(`Server started on port ${port}`); });
-app.get('/', (req, res) => { res.send('Connected to server...'); });
+app.get('/', (req, res) => { res.send('TrackMate'); });
 app.use(express.json());
 app.use('/admin', admin);
 app.use('/teacher', teacher);
