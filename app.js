@@ -28,7 +28,7 @@ function checkFiles() {
     }
     fs.mkdirSync("./data");
     fs.mkdirSync("./data/classes");
-    const files = [{ 'fname': "teachers.json", 'init': { 'teachers': {} } }, { 'fname': "teachers_requests.json", 'init': { 'requests': [] } }, { 'fname': "timings.json", 'init': { 'all': [{ hr: 9, min: 0 }, { hr: 9, min: 0 }, { hr: 10, min: 0 }, { hr: 11, min: 0 }, { hr: 12, min: 0 }, { hr: 1, min: 0 }, { hr: 2, min: 0 }, { hr: 3, min: 0 }, { hr: 4, min: 0 }] } }];
+    const files = [{ 'fname': "teachers.json", 'init': { 'teachers': {} } }, { 'fname': "teachers_requests.json", 'init': { 'requests': [] } }, { 'fname': "timings.json", 'init': { 'timings': [{ hr: 9, min: 0 }, { hr: 10, min: 0 }, { hr: 11, min: 0 }, { hr: 12, min: 0 }] } }];
     files.forEach((file) => {
         fs.access(`./data/${file['fname']}`, fs.constants.F_OK, (err) => {
             if (err) {
@@ -68,7 +68,7 @@ const interval = setInterval(() => {
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const data = JSON.parse(fs.readFileSync('./data/timings.json', 'utf-8'));
-    const times = data[now.getDay()] ? data[now.getDay()] : data['all'];
+    const times = data['timings'];
     times.forEach((time) => {
         if (hours == time.hr && minutes == time.min) {
             resetStatus();

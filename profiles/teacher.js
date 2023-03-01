@@ -30,7 +30,7 @@ router.post('/auth', (req, res) => {
             console.log('invalid teacher credentials');
         }
         res.send();
-    });    
+    });
 });
 
 router.post('/new', (req, res) => {
@@ -58,29 +58,12 @@ router.post('/class/view', (req, res) => {
     });
 });
 
-router.get('/class/list', (req, res) => {
-    server(req, res, (req, res) => {
-        fs.readdir("./data/classes", (err, files) => {
-            if (err) {
-                console.log('Error reading classes', err);
-                res.status(500).send();
-            } else {
-                const classes = files.map((file) => {
-                    return path.parse(file).name;
-                });
-                console.log('classes are ', classes);
-                res.send({ "classes": classes });
-            }
-        });
-    });
-});
-
-router.get('/requests', (req, res) => {
+router.post('/requests', (req, res) => {
     server(req, res, (req, res) => {
         const data = app.readFile('teachers.json');
         const requests = data['teachers'][req.body.username]['requests'];
         console.log('sending students requests');
-        res.send(requests);
+        res.send({ "requests": requests });
     });
 });
 

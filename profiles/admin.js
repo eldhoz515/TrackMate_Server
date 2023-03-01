@@ -142,7 +142,6 @@ router.get('/class/list', (req, res) => {
 
 router.post('/student/remove', (req, res) => {
     server(req, res, (req, res) => {
-        console.log('removing student')
         let data = app.readFile(`classes/${req.body.class}.json`);
         if (data[req.body.username]) {
             delete data[req.body.username];
@@ -165,13 +164,15 @@ router.get('/attendance', (req, res) => {
 
 router.get('/timings', (req, res) => {
     server(req, res, (req, res) => {
+        console.log('sending timings')
         res.send(app.readFile('timings.json'));
     });
 });
 
 router.post('/timings', (req, res) => {
     server(req, res, (req, res) => {
-        app.writeFile('timings.json', req.body.timings);
+        console.log('updating timings')
+        app.writeFile('timings.json', req.body);
         res.send();
     });
 });
