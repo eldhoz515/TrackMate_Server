@@ -89,7 +89,7 @@ router.post('/class/add', (req, res) => {
         const path = `./data/classes/${req.body.class}.json`;
         fs.access(path, fs.constants.F_OK, (err) => {
             if (err) {
-                fs.writeFileSync(path, JSON.stringify({}));
+                fs.writeFileSync(path, JSON.stringify({"students":{},"attendance":{}}));
                 console.log('new class added');
                 res.send();
             }
@@ -118,7 +118,8 @@ router.post('/class/remove', (req, res) => {
 
 router.post('/class/view', (req, res) => {
     server(req, res, (req, res) => {
-        res.send(app.readFile(`classes/${req.body.class}.json`));
+        const data = app.readFile(`classes/${req.body.class}.json`);
+        res.send(data['students']);
         console.log('viewing class');
     });
 });
@@ -143,8 +144,8 @@ router.get('/class/list', (req, res) => {
 router.post('/student/remove', (req, res) => {
     server(req, res, (req, res) => {
         let data = app.readFile(`classes/${req.body.class}.json`);
-        if (data[req.body.username]) {
-            delete data[req.body.username];
+        if (data['students'][req.body.username]) {
+            delete data['students'][req.body.username];
         }
         else {
             res.status(403);
@@ -157,7 +158,7 @@ router.post('/student/remove', (req, res) => {
 
 router.get('/attendance', (req, res) => {
     server(req, res, (req, res) => {
-        res.send(app.readFile(`classes/${req.body.class}.json`));
+        res.send(app.readFile(`classes/${req.body.class}.json`)["attendance"]);
         console.log('attendance returned');
     });
 });

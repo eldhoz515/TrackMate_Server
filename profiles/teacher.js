@@ -53,7 +53,8 @@ router.post('/new', (req, res) => {
 
 router.post('/class/view', (req, res) => {
     server(req, res, (req, res) => {
-        res.send(app.readFile(`classes/${req.body.class}.json`));
+        const data = app.readFile(`classes/${req.body.class}.json`);
+        res.send(data['students']);
         console.log('viewing class');
     });
 });
@@ -77,7 +78,7 @@ router.post('/respond', (req, res) => {
         app.writeFile('teachers.json', data);
         if (req.body.accept) {
             data = app.readFile(`classes/${student.class}.json`);
-            data[student.username] = student;
+            data['students'][student.username] = student;
             app.writeFile(`classes/${student.class}.json`, data);
             console.log('Added new student');
         }
@@ -91,15 +92,12 @@ router.post('/respond', (req, res) => {
 
 router.post('/attendance', (req, res) => {
     server(req, res, (req, res) => {
-        const data = app.readFile(`classes/${req.body.class}.json`);
-        if (!data['$attendance']) {
-            data['$attendance'] = {};
-        }
+        let data = app.readFile(`classes/${req.body.class}.json`);        
         for (student in req.body.attendance) {
-            if (!data['$attendance'][student]) {
-                data['$attendance'][student] = [];
+            if (!data['attendance'][student]) {
+                data['attendance'][student] = [];
             }
-            data['$attendance'][student].push(req.body.attendance[student]);
+            data['attendance'][student].push(req.body.attendance[student]);
         }
         app.writeFile(`classes/${req.body.class}.json`, data);
         console.log('Attendance marked successfully');
@@ -108,7 +106,7 @@ router.post('/attendance', (req, res) => {
 
 router.get('/attendance', (req, res) => {
     server(req, res, (req, res) => {
-        res.send(app.readFile(`classes/${req.body.class}.json`));
+        res.send(app.readFile(`classes/${req.body.class}.json`)["attendance"]);
         console.log('attendance returned');
     });
 });

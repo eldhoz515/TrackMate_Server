@@ -47,12 +47,13 @@ function resetStatus() {
         else {
             files.forEach((file) => {
                 const data = JSON.parse(fs.readFileSync(`./data/classes/${file}`, 'utf-8'));
-                let newData = {};
-                for (const username in data) {
-                    let student = data[username];
-                    student.status = { 'auth': 0, 'Apps': 0 };
-                    newData[username] = student;
+                let newData = {"students":{}};
+                for (const username in data['students']) {
+                    let student = data['students'][username];
+                    student.status = { 'auth': 0, 'Apps': 1 };
+                    newData['students'][username] = student;
                 }
+                newData["attendance"]=data['attendance']
                 fs.writeFileSync(`./data/classes/${file}`, JSON.stringify(newData));
             });
         }

@@ -74,10 +74,17 @@ router.post('/new', (req, res) => {
     });
 });
 
+router.get('/timings', (req, res) => {
+    server(req, res, (req, res) => {
+        console.log('sending timings')
+        res.send(app.readFile('timings.json'));
+    });
+});
+
 router.post('/status', (req, res) => {
     server(req, res, (req, res) => {
         let data = app.readFile(`classes/${req.body.class}.json`);
-        data[req.body.username]['status'] = req.body.status;
+        data['students'][req.body.username]['status'] = req.body.status;
         app.writeFile(`classes/${req.body.class}.json`, data);
         res.send();
     });
@@ -85,7 +92,7 @@ router.post('/status', (req, res) => {
 
 router.get('/attendance', (req, res) => {
     server(req, res, (req, res) => {
-        res.send(app.readFile(`classes/${req.body.class}.json`));
+        res.send(app.readFile(`classes/${req.body.class}.json`)["attendance"]);
         console.log('attendance returned');
     });
 });
