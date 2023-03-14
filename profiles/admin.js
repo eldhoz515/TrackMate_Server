@@ -1,5 +1,5 @@
 const username = "admin";
-const password = "123";
+const password = "12345";
 
 const express = require('express');
 const router = express.Router();
@@ -52,6 +52,7 @@ router.post('/respond', (req, res) => {
         app.writeFile('teachers_requests.json', data);
         if (req.body.accept) {
             data = app.readFile('teachers.json');
+            req.body.teacher.requests=[];
             data['teachers'][req.body.teacher.username] = req.body.teacher;
             app.writeFile('teachers.json', data);
             console.log('Added new teacher');

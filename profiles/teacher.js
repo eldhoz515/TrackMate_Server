@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.post('/auth', (req, res) => {
     server(req, res, (req, res) => {
         const data = app.readFile('teachers.json');
-        if (data['teachers'][req.body.username]['password'] == password) {
+        if (data['teachers'][req.body.username]['password'] == req.body.password) {
             console.log('teacher authenticated');
             res.status(200);
         }

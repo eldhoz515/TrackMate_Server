@@ -28,7 +28,7 @@ function checkFiles() {
     }
     fs.mkdirSync("./data");
     fs.mkdirSync("./data/classes");
-    const files = [{ 'fname': "teachers.json", 'init': { 'teachers': { "tanya": { "username": "tanya", "name": "tanya", "password": "1234", "requests": [{ "username": "arun", "name": "arun", "password": "1234", "id": "00:23:fg:00:00:00", "class": "cse" }, { "username": "varun", "name": "varun", "password": "1234", "id": "ff:23:fg:00:00:00", "class": "cse" }] }, "sanya": { "username": "sanya", "name": "sanya", "password": "1234" } } } }, { 'fname': "teachers_requests.json", 'init': { 'requests': [{ "username": "ranya", "name": "ranya", "password": "1234" }] } }, { 'fname': "timings.json", 'init': { 'timings': [{ hr: 9, min: 0 }, { hr: 10, min: 0 }, { hr: 11, min: 0 }, { hr: 12, min: 0 }, { hr: 13, min: 0 }, { hr: 14, min: 0 }, { hr: 15, min: 0 }, { hr: 16, min: 0 }] } }];
+    const files = [{ 'fname': "teachers.json", 'init': { 'teachers': { "tanya": { "username": "tanya", "name": "tanya", "password": "12345", "requests": [{ "username": "arun", "name": "arun", "password": "12345", "id": "00:23:fg:00:00:00", "class": "cse" }, { "username": "varun", "name": "varun", "password": "12345", "id": "ff:23:fg:00:00:00", "class": "cse" }] }, "sanya": { "username": "sanya", "name": "sanya", "password": "1234" } } } }, { 'fname': "teachers_requests.json", 'init': { 'requests': [{ "username": "ranya", "name": "ranya", "password": "12345" }] } }, { 'fname': "timings.json", 'init': { 'timings': [{ hr: 9, min: 0 }, { hr: 10, min: 0 }, { hr: 11, min: 0 }, { hr: 12, min: 0 }, { hr: 13, min: 0 }, { hr: 14, min: 0 }, { hr: 15, min: 0 }, { hr: 16, min: 0 }] } }];
     files.forEach((file) => {
         fs.access(`./data/${file['fname']}`, fs.constants.F_OK, (err) => {
             if (err) {
@@ -37,7 +37,7 @@ function checkFiles() {
         });
     });
 
-    fs.writeFileSync("./data/classes/cse.json", JSON.stringify({ "students": { "warun": { "username": "warun", "name": "warun", "password": "1234", "id": "24:23:fg:00:00:00", "class": "cse" }, "parun": { "username": "parun", "name": "parun", "password": "1234", "id": "gg:23:fg:00:00:00", "class": "cse" } }, "attendance": {} }));
+    fs.writeFileSync("./data/classes/cse.json", JSON.stringify({ "students": { "warun": { "username": "warun", "name": "warun", "password": "12345", "id": "24:23:fg:00:00:00", "class": "cse" }, "parun": { "username": "parun", "name": "parun", "password": "12345", "id": "gg:23:fg:00:00:00", "class": "cse" } }, "attendance": {} }));
     
     fs.writeFileSync("./data/classes/ece.json", JSON.stringify({ "students": {}, "attendance": {} }));
 }
