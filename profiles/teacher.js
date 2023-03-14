@@ -51,6 +51,23 @@ router.post('/new', (req, res) => {
     });
 });
 
+router.get('/class/list', (req, res) => {
+    server(req, res, (req, res) => {
+        fs.readdir("./data/classes", (err, files) => {
+            if (err) {
+                console.log('Error reading classes', err);
+                res.status(500).send();
+            } else {
+                const classes = files.map((file) => {
+                    return path.parse(file).name;
+                });
+                console.log('classes are ', classes);
+                res.send({ "classes": classes });
+            }
+        });
+    });
+});
+
 router.post('/class/view', (req, res) => {
     server(req, res, (req, res) => {
         const data = app.readFile(`classes/${req.body.class}.json`);
@@ -101,6 +118,7 @@ router.post('/attendance', (req, res) => {
         }
         app.writeFile(`classes/${req.body.class}.json`, data);
         console.log('Attendance marked successfully');
+	res.send();
     });
 });
 
