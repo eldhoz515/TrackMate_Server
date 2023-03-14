@@ -36,6 +36,7 @@ function checkFiles() {
             }
         });
     });
+    
     fs.writeFileSync("./data/classes/cse.json", JSON.stringify({ "students": { "warun": { "username": "warun", "name": "warun", "password": "1234", "id": "24:23:fg:00:00:00", "class": "cse" }, "parun": { "username": "parun", "name": "parun", "password": "1234", "id": "gg:23:fg:00:00:00", "class": "cse" } }, "attendance": {} }));
     fs.writeFileSync("./data/classes/ece.json", JSON.stringify({ "students": {}, "attendance": {} }));
 }
