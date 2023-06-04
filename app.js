@@ -37,8 +37,8 @@ function checkFiles() {
         });
     });
 
-    fs.writeFileSync("./data/classes/cse.json", JSON.stringify({ "students": { "warun": { "username": "warun", "name": "warun", "password": "12345", "id": "24:23:fg:00:00:00", "class": "cse" }, "parun": { "username": "parun", "name": "parun", "password": "12345", "id": "gg:23:fg:00:00:00", "class": "cse" } }, "attendance": {} }));
-    
+    fs.writeFileSync("./data/classes/cse.json", JSON.stringify({ "students": { "warun": { "username": "warun", "name": "warun", "password": "12345", "id": "24:23:fg:00:00:00", "class": "cse" }, "parun": { "username": "parun", "name": "parun", "password": "12345", "id": "gg:23:fg:00:00:00", "class": "cse" } }, "attendance": { "warun": [0, 1, 1, 0, 0, 0], "parun": [1, 0, 0, 0, 0, 0] } }));
+
     fs.writeFileSync("./data/classes/ece.json", JSON.stringify({ "students": {}, "attendance": {} }));
 }
 
