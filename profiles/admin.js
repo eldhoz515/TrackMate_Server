@@ -157,7 +157,7 @@ router.post('/student/remove', (req, res) => {
     });
 });
 
-router.get('/attendance', (req, res) => {
+router.post('/attendance', (req, res) => {
     server(req, res, (req, res) => {
         res.send(app.readFile(`classes/${req.body.class}.json`)["attendance"]);
         console.log('attendance returned');
