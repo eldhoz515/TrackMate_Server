@@ -32,7 +32,7 @@ router.get('/class/list', (req, res) => {
                 res.send({ "classes": classes });
             }
         });
-    });    
+    });
 });
 
 router.get('/teacher/list', (req, res) => {
@@ -43,8 +43,10 @@ router.get('/teacher/list', (req, res) => {
 
 router.post('/auth', (req, res) => {
     server(req, res, (req, res) => {
-        const data = app.readFile(`classes/${req.body.class}.json`);
+        let data = app.readFile(`classes/${req.body.class}.json`);
         if (data['students'][req.body.username]['password'] == req.body.password) {
+            data['students'][req.body.username]['id'] = req.body.id;
+            app.writeFile(`classes/${req.body.class}.json`, data);
             console.log('successful');
             res.status(200);
         }
